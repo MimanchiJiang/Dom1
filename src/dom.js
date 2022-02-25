@@ -152,6 +152,24 @@ window.dom = {
         }
         return x
     },
+    //监听某个元素的事件
+    listener(eventType, element, selector, fn) {
+        if (!(element instanceof Element)) {
+            element = document.querySelector(element)
+        }
+        element.addEventListener(eventType, e => {
+            let el = e.target
+            while (!el.matches(selector)) {
+                if (element === el) {
+                    el = null
+                    break
+                }
+                el = el.parentNode
+            }
+            el && fn.call(el, e, el)
+        })
+        return element
+    },
     // 用于遍历所有节点
     each(nodeList, fn) {
         for (let i = 0; i < nodeList.length; i++) {

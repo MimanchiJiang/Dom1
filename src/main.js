@@ -43,3 +43,8 @@ const t = dom.find('#travel')[0]
 dom.each(dom.children(t), (n) => dom.style(n, 'color', 'red'))
 
 console.log(dom.index(t2))
+
+//监听某个元素的事件  不局限于点击事件
+dom.listener('click', '#button', 'button', () => {
+    console.log('我被点击了')
+})
